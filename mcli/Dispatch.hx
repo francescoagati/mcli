@@ -15,7 +15,7 @@ using Lambda;
 
 
 	public var handle_error:String->Void = null;
-
+	public var handle_println:String->Void = null;
 
 	/**
 		Formats an argument definition to String.
@@ -331,6 +331,9 @@ using Lambda;
 #else
 		haxe.Log.trace(s,null);
 #end
+
+		if (handle_println != null) handle_println(s);
+
 	}
 
 	private static function isArgument(str:String)
