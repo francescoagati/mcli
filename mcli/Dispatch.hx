@@ -10,12 +10,21 @@ import haxe.macro.TypeTools;
 using mcli.internal.Tools;
 using Lambda;
 
+
+enum HandlerMessages(
+	Err(s:String);
+	Line(s:String);
+	Terminated;
+)
+
+
+
 @:access(mcli.CommandLine) class Dispatch
 {
 
 
-	public var handle_error:String->Void = null;
-	public var handle_println:String->Void = null;
+	public var handler:HandlerMessages->Void = null;
+
 
 	/**
 		Formats an argument definition to String.
@@ -320,7 +329,7 @@ using Lambda;
 		haxe.Log.trace(s,null);
 #end
 
-	if (handle_error != null) handle_error(s);
+		if (handler != null) handler(Err(s));
 
 	}
 
@@ -332,7 +341,7 @@ using Lambda;
 		haxe.Log.trace(s,null);
 #end
 
-		if (handle_println != null) handle_println(s);
+		if (handler != null) handler(Line(s));
 
 	}
 
@@ -405,7 +414,7 @@ using Lambda;
 				Sys.exit(1);
 #end
 			}
-
+			f (handler != null) handler(Terminate);
 			return;
 		}
 
