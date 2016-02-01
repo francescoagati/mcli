@@ -414,7 +414,7 @@ enum HandlerMessages {
 				Sys.exit(1);
 #end
 			}
-			f (handler != null) handler(Terminated);
+			if (handler != null) handler(Terminated);
 			return;
 		}
 
