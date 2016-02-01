@@ -397,6 +397,17 @@ using Lambda;
 			}
 
 			return;
+		} else {
+
+			try
+			{
+				_dispatch(v,false);
+			}
+			catch(e:DispatchError)
+			{
+				throw e;
+			}
+
 		}
 
 		var defs = v.getArguments();
