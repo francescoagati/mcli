@@ -11,11 +11,11 @@ using mcli.internal.Tools;
 using Lambda;
 
 
-enum HandlerMessages(
+enum HandlerMessages {
 	Err(s:String);
 	Line(s:String);
 	Terminated;
-)
+}
 
 
 
