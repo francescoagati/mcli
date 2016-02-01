@@ -13,6 +13,10 @@ using Lambda;
 @:access(mcli.CommandLine) class Dispatch
 {
 
+
+	public var handle_error:String->Void = null;
+
+
 	/**
 		Formats an argument definition to String.
 		[argSize] maximum argument string length
@@ -315,6 +319,9 @@ using Lambda;
 #else
 		haxe.Log.trace(s,null);
 #end
+
+	if (handle_error != null) handle_error(s);
+
 	}
 
 	private function println(s:String)
@@ -397,17 +404,6 @@ using Lambda;
 			}
 
 			return;
-		} else {
-
-			try
-			{
-				_dispatch(v,false);
-			}
-			catch(e:DispatchError)
-			{
-				throw e;
-			}
-
 		}
 
 		var defs = v.getArguments();
